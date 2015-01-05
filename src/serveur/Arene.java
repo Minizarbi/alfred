@@ -348,4 +348,8 @@ public class Arene extends UnicastRemoteObject implements IArene, Runnable {
 	public void supprimerElement(Remote elem) {
 		elements.remove(elem);
 	}
+
+	public int getSize() {
+		return 25;
+	}
 }

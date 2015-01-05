@@ -8,3 +8,7 @@
 
 == Règles ==
 - Ajouter des murs à l'arène.
+- Temps limite résulte une égalité.
+
+== IHM ==
+- Mode pas à pas, un bouton qui permet de faire avancer progressivement le combat au lieu de le faire automatiquement toutes les secondes.
