@@ -5,3 +5,6 @@
 - Potion Tumvoiplu : Invisible pour un temps donnée ou jusqu'au prochain mouvement.
 - Potion Oracle : Permet de voir les invisibles pour un temps donnée.
 - Potion Kyexploz : Place une potion qui explose quand on la ramasse.
+
+== Règles ==
+- Ajouter des murs à l'arène.
