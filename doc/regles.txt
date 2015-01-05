@@ -1,0 +1,7 @@
+== Caractéristiques ==
+- Une quantité de point donnée à répartir entre force et charisme.
+
+== Potions ==
+- Potion Tumvoiplu : Invisible pour un temps donnée ou jusqu'au prochain mouvement.
+- Potion Oracle : Permet de voir les invisibles pour un temps donnée.
+- Potion Kyexploz : Place une potion qui explose quand on la ramasse.

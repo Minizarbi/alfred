@@ -24,11 +24,16 @@ public class Ramasseur extends Personnage {
         Deplacements deplacements = new Deplacements(ve,voisins);
         
         if (0 == voisins.size()) { // je n'ai pas de voisins, j'erre
-        	parler("J'erre...", ve);
+        	parler("Y'a pas de potion, j'erre...", ve);
         	deplacements.seDirigerVers(0); //errer
             
         } else {
 			VueElement cible = Calculs.chercherPotionProche(ve, voisins);
+			
+			if (cible == null) { // si il n'y a pas de potion a proximite
+				parler("Y'a que des personnages, j'erre...", ve);
+				deplacements.seDirigerVers(0);
+			}
 			
 			int distPlusProche = Calculs.distanceChebyshev(ve.getPoint(), cible.getPoint());
 			
@@ -37,7 +42,7 @@ public class Ramasseur extends Personnage {
 			if(distPlusProche <= 2) { // si suffisamment proches
 				parler("Je ramasse une potion", ve);
 				actions.ramasser(refRMI, refPlusProche, ve.getControleur().getArene());
-			} else { // si voisins, mais plus eloignes
+			} else { // si potions, mais plus eloignes
 				// je vais vers la potion
 	        	parler("Je vais vers la potion " + refPlusProche, ve);
 	        	deplacements.seDirigerVers(refPlusProche);

@@ -135,13 +135,17 @@ public class IHM extends JFrame {
 						ref=s.getRef();
 						
 						Random r=new Random(ref);
-						//calcule une couleur pour la representation
-						g.setColor(new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255), 200));
 						
 						//recupere les coordonnes de l'element
 						cx=s.getPoint().x*rect.width/100;
 						cy=s.getPoint().y*rect.height/100;
 						
+						// Couleur du contour : Noir
+						g.setColor(new Color(0, 0, 0, 255));
+						// Contour
+						g.fillOval(cx - 1,cy - 1,10,10);
+						//calcule une couleur pour la representation
+						g.setColor(new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255), 200));
 						//construis un oval aux coordonnes cx,cy de taille 8 x 8
 						g.fillOval(cx,cy,8,8);
 						
