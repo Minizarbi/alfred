@@ -3,10 +3,14 @@ package utilitaires;
 import interfaceGraphique.VueElement;
 
 import java.awt.Point;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Hashtable;
+
+import element.Element;
+import element.Potion;
 
 /**
  * Classe regroupant quelques methodes utiles pour l'arene (distance, case vide,
@@ -95,4 +99,22 @@ public class Calculs {
 		return voisins.get(refPlusProche);
 	}
 	
+	public static VueElement chercherPotionProche(VueElement ve, Hashtable<Integer,VueElement> voisins){
+		int distPlusProche = 100;
+		int refPlusProche = 0;	
+		for(Integer ref:voisins.keySet()) {
+			Point target = voisins.get(ref).getPoint();
+			Element voisin = null;
+			try {
+				voisin = voisins.get(ref).getControleur().getElement();
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+			if (voisin instanceof Potion && Calculs.distanceChebyshev(ve.getPoint(),target)<distPlusProche) {
+				distPlusProche = Calculs.distanceChebyshev(ve.getPoint(),target);
+				refPlusProche = ref;
+			}
+		}		
+		return voisins.get(refPlusProche);
+	}
 }
