@@ -88,17 +88,23 @@ public class Calculs {
 	 */
 	public static VueElement chercherElementProche(VueElement ve, Hashtable<Integer,VueElement> voisins){
 		int distPlusProche = 100;
-		int refPlusProche = 0;	
+		int refPlusProche = 0;
 		for(Integer ref:voisins.keySet()) {
 			Point target = voisins.get(ref).getPoint();
 			if (Calculs.distanceChebyshev(ve.getPoint(),target)<distPlusProche) {
 				distPlusProche = Calculs.distanceChebyshev(ve.getPoint(),target);
 				refPlusProche = ref;
 			}
-		}		
+		}
 		return voisins.get(refPlusProche);
 	}
 	
+	/**
+	 * Cherche la potion la plus proche vers laquelle se diriger
+	 * @param ve l'element courant
+	 * @param voisins les elements voisins
+	 * @return la vue de la potion la plus proche
+	 */
 	public static VueElement chercherPotionProche(VueElement ve, Hashtable<Integer,VueElement> voisins){
 		int distPlusProche = 100;
 		int refPlusProche = 0;	
@@ -110,11 +116,11 @@ public class Calculs {
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
-			if (voisin instanceof Potion && Calculs.distanceChebyshev(ve.getPoint(),target)<distPlusProche) {
+			if ((voisin instanceof Potion) && Calculs.distanceChebyshev(ve.getPoint(),target)<distPlusProche) {
 				distPlusProche = Calculs.distanceChebyshev(ve.getPoint(),target);
 				refPlusProche = ref;
 			}
-		}		
+		}
 		return voisins.get(refPlusProche);
 	}
 }
