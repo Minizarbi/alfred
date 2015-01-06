@@ -14,15 +14,14 @@ import utilitaires.Calculs;
  * il n'en a oas besoin.
  */
 public class Maitre extends Personnage {
-	/**
-	 *
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	public Maitre(String nom) {
 		super(nom, 2147483647, 2147483647);
 	}
 
+	@Override
 	public void strategie(VueElement ve,
 			Hashtable<Integer, VueElement> voisins, Integer refRMI)
 			throws RemoteException {

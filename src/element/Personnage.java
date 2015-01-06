@@ -118,7 +118,7 @@ public class Personnage extends Element implements IPersonnage {
 
 	@Override
 	public void ajouterEquipe(int ref) throws RemoteException {
-		equipe.add((Integer) ref);
+		equipe.add(ref);
 	}
 
 	@Override
@@ -143,6 +143,7 @@ public class Personnage extends Element implements IPersonnage {
 	 *            reference attribuee a cet element par le serveur
 	 * @throws RemoteException
 	 */
+	@Override
 	public void strategie(VueElement ve,
 			Hashtable<Integer, VueElement> voisins, Integer refRMI)
 			throws RemoteException {

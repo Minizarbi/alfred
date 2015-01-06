@@ -132,6 +132,7 @@ public class Console extends UnicastRemoteObject implements IConsole {
 	 * proximite, lance l'interaction sinon se dirige vers lui (s'il existe un
 	 * plus proche) Cette methode est execute chaque seconde
 	 */
+	@Override
 	public void run() throws RemoteException {
 		// si l'element auquel le controleur est associe est un personnage
 		if (elem instanceof Personnage) {
@@ -147,8 +148,9 @@ public class Console extends UnicastRemoteObject implements IConsole {
 	/**
 	 * Appelle par le serveur pour faire la MAJ du sujet.
 	 */
+	@Override
 	public VueElement update() throws RemoteException {
-		VueElement aux = (VueElement) ve.clone();
+		VueElement aux = ve.clone();
 		aux.setPhrase(ve.getPhrase());
 		return aux;
 	}
@@ -159,23 +161,28 @@ public class Console extends UnicastRemoteObject implements IConsole {
 	 * @param cause
 	 *            le message a afficher comme cause de la deconnexion
 	 */
+	@Override
 	public void shutDown(String cause) throws RemoteException {
 		System.out.println("Console " + refRMI + " deconnectee : " + cause);
 		System.exit(1);
 	}
 
+	@Override
 	public Element getElement() throws RemoteException {
 		return elem;
 	}
 
+	@Override
 	public VueElement getVueElement() throws RemoteException {
 		return ve;
 	}
 
+	@Override
 	public int getRefRMI() throws RemoteException {
 		return refRMI;
 	}
 
+	@Override
 	public IArene getArene() throws RemoteException {
 		return arene;
 	}
@@ -183,6 +190,7 @@ public class Console extends UnicastRemoteObject implements IConsole {
 	/**
 	 * Identifie la phrase de l'element avec la ref RMI
 	 */
+	@Override
 	public String afficher() throws RemoteException {
 		return "(" + refRMI + ")" + this.elem.toString();
 	}
@@ -191,6 +199,7 @@ public class Console extends UnicastRemoteObject implements IConsole {
 	/**
 	 * Enleve une partie de la vie de l'element.
 	 */
+	@Override
 	public void perdreVie(int viePerdue) throws RemoteException {
 		elem.setVie(elem.getVie() - viePerdue);
 
@@ -205,6 +214,7 @@ public class Console extends UnicastRemoteObject implements IConsole {
 	/**
 	 * Modifie une partie ou toutes les caracteristiques de l'element.
 	 */
+	@Override
 	public void majCaractElement(Hashtable<String, Integer> nvCaract)
 			throws RemoteException {
 		elem.getCaract().putAll(nvCaract);

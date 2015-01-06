@@ -36,6 +36,7 @@ public interface IElement {
 	 * @return chaine de caractere contenant au moins le nom de l'element et le
 	 *         nombre de vies tel qu'il sera affiche sur l'interface graphique
 	 */
+	@Override
 	public String toString();
 
 	/**

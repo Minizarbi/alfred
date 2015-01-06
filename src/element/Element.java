@@ -36,14 +36,17 @@ public class Element implements IElement, Serializable {
 		caract.put("vie", 1);
 	}
 
+	@Override
 	public String getNom() {
 		return this.nom;
 	}
 
+	@Override
 	public int getVie() {
 		return caract.get("vie");
 	}
 
+	@Override
 	public void setVie(int vie) {
 		caract.put("vie", vie);
 	}
@@ -82,12 +85,14 @@ public class Element implements IElement, Serializable {
 		caract.put(c, val);
 	}
 
+	@Override
 	public void strategie(VueElement ve,
 			Hashtable<Integer, VueElement> voisins, Integer refRMI)
 			throws RemoteException {
 		// Un element basique ne fait "rien", comme une potion
 	}
 
+	@Override
 	public void parler(String s, VueElement ve) throws RemoteException {
 		ve.setPhrase(s);
 	}

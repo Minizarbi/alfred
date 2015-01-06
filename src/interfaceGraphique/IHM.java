@@ -99,6 +99,7 @@ public class IHM extends JFrame {
 			this.jta = jta;
 		}
 
+		@Override
 		public void paintComponent(Graphics g) {
 			// affiche l'arene comme un rectangle
 			Rectangle rect = this.getBounds();
@@ -222,6 +223,7 @@ public class IHM extends JFrame {
 		Action exitAction = new AbstractAction("Quitter") {
 			private static final long serialVersionUID = 1L;
 
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				System.exit(0);
 			}
@@ -230,6 +232,7 @@ public class IHM extends JFrame {
 		Action aboutAction = new AbstractAction("A propos") {
 			private static final long serialVersionUID = 1L;
 
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				JOptionPane.showMessageDialog(null,
 						"Arene\nInspiree des TP de L3");
@@ -263,6 +266,7 @@ public class IHM extends JFrame {
 	 */
 	public void connect() {
 		connection = new Thread() {
+			@Override
 			public void run() {
 				try {
 					// pour utiliser les parametres

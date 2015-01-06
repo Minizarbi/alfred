@@ -15,15 +15,13 @@ import utilitaires.Calculs;
  */
 public class Fuyard extends Personnage {
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public Fuyard(String nom) {
 		super(nom, 100, 100);
 	}
 
+	@Override
 	public void strategie(VueElement ve,
 			Hashtable<Integer, VueElement> voisins, Integer refRMI)
 			throws RemoteException {

@@ -147,6 +147,7 @@ public final class VueElement implements Serializable {
 	/**
 	 * Clone la representation courante de l'element
 	 */
+	@Override
 	public VueElement clone() {
 		return new VueElement(ref, point, ctr, phrase, TTL);
 	}

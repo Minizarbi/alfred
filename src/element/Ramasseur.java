@@ -14,15 +14,14 @@ import utilitaires.Calculs;
  * s'il n'en trouve pas, il erre.
  */
 public class Ramasseur extends Personnage {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	public Ramasseur(String nom) {
 		super(nom, 100, 100);
 	}
 
+	@Override
 	public void strategie(VueElement ve,
 			Hashtable<Integer, VueElement> voisins, Integer refRMI)
 			throws RemoteException {
@@ -36,25 +35,25 @@ public class Ramasseur extends Personnage {
 
 		} else {
 			VueElement cible = Calculs.chercherPotionProche(ve, voisins);
-
+			
 			if (cible == null) { // si il n'y a pas de potion a proximite
 				parler("Y'a que des personnages, j'erre...", ve);
+				System.out.println("Here!");
 				deplacements.seDirigerVers(0);
 			}
-
-			int distPlusProche = Calculs.distanceChebyshev(ve.getPoint(),
-					cible.getPoint());
-
-			int refPlusProche = cible.getRef();
-
-			if (distPlusProche <= 2) { // si suffisamment proches
-				parler("Je ramasse une potion", ve);
-				actions.ramasser(refRMI, refPlusProche, ve.getControleur()
-						.getArene());
-			} else { // si potions, mais plus eloignes
-				// je vais vers la potion
-				parler("Je vais vers la potion " + refPlusProche, ve);
-				deplacements.seDirigerVers(refPlusProche);
+			else {
+				int distPlusProche = Calculs.distanceChebyshev(ve.getPoint(), cible.getPoint());
+	
+				int refPlusProche = cible.getRef();
+	
+				if (distPlusProche <= 2) { // si suffisamment proches
+					parler("Je ramasse une potion", ve);
+					actions.ramasser(refRMI, refPlusProche, ve.getControleur().getArene());
+				} else { // si potions, mais plus eloignes
+					// je vais vers la potion
+					parler("Je vais vers la potion " + refPlusProche, ve);
+					deplacements.seDirigerVers(refPlusProche);
+				}
 			}
 		}
 	}

@@ -104,6 +104,7 @@ public class Arene extends UnicastRemoteObject implements IArene, Runnable {
 	/**
 	 * @return the port
 	 */
+	@Override
 	public int getPort() throws RemoteException {
 		return port;
 	}
@@ -111,6 +112,7 @@ public class Arene extends UnicastRemoteObject implements IArene, Runnable {
 	/**
 	 * @return the ipAddrConsoles
 	 */
+	@Override
 	public Hashtable<Integer, String> getIpAddrConsoles()
 			throws RemoteException {
 		return ipAddrConsoles;
@@ -124,6 +126,7 @@ public class Arene extends UnicastRemoteObject implements IArene, Runnable {
 	 * @return reference (entiere) utilisee pour rmi, compter les elements
 	 * @throws RemoteException
 	 */
+	@Override
 	public synchronized int allocateRef() throws RemoteException {
 		compteur++;
 		return compteur;
@@ -133,6 +136,7 @@ public class Arene extends UnicastRemoteObject implements IArene, Runnable {
 	 * Boucle principale du thread serveur, supprime les elements non-vivants ou
 	 * qui sont trop longs, et s'arrete au bout de 30 minutes (par defaut).
 	 */
+	@Override
 	public void run() {
 		TimeoutOp to;
 		long tempsDepart = System.currentTimeMillis();
@@ -193,7 +197,7 @@ public class Arene extends UnicastRemoteObject implements IArene, Runnable {
 	public boolean verif(Remote r) throws RemoteException {
 		boolean res = true;
 
-		Element e = (Element) ((IConsole) r).getElement();
+		Element e = ((IConsole) r).getElement();
 
 		if (e instanceof Personnage) {
 			Personnage p = (Personnage) e;
@@ -222,6 +226,7 @@ public class Arene extends UnicastRemoteObject implements IArene, Runnable {
 	 *            adresse ip de la console qui se connecte
 	 * @throws RemoteException
 	 */
+	@Override
 	public synchronized void connect(VueElement s, String ipConsole)
 			throws RemoteException {
 		try {
@@ -285,6 +290,7 @@ public class Arene extends UnicastRemoteObject implements IArene, Runnable {
 	 * Appele par l'IHM pour afficher une representation de l'arene via RMI, on
 	 * envoie une copie (serialisee) du monde
 	 */
+	@Override
 	public ArrayList<VueElement> getWorld() throws RemoteException {
 		ArrayList<VueElement> aux = new ArrayList<VueElement>();
 		for (VueElement s : elements.values()) {
@@ -314,6 +320,7 @@ public class Arene extends UnicastRemoteObject implements IArene, Runnable {
 	 * Liste des reference des voisins (distance inferieure a 10) et leurs
 	 * coordonnees a partir d'une position
 	 */
+	@Override
 	public Hashtable<Integer, VueElement> voisins(Point pos, int ref)
 			throws RemoteException {
 		// Hashtable<Integer, Point> aux=new Hashtable<Integer, Point>();
@@ -342,6 +349,7 @@ public class Arene extends UnicastRemoteObject implements IArene, Runnable {
 			start();
 		}
 
+		@Override
 		public void run() {
 			try {
 				((IConsole) r).run(); // on lance une execution

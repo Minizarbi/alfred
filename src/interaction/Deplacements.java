@@ -40,6 +40,7 @@ public class Deplacements implements IDeplacements {
 	 * @param ref
 	 *            la reference de l'element cible
 	 */
+	@Override
 	public void seDirigerVers(int ref) {
 		if (actionExecutee) {
 			System.err
@@ -105,6 +106,7 @@ public class Deplacements implements IDeplacements {
 	 * @param pvers
 	 *            case cible
 	 */
+	@Override
 	public void seDirigerVers(Point pvers) {
 		if (actionExecutee) {
 			System.err

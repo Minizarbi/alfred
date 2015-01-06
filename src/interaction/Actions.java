@@ -51,6 +51,7 @@ public class Actions implements IActions {
 	 * @param arene
 	 *            arene
 	 */
+	@Override
 	public void ramasser(int ref1, int ref2, IArene arene)
 			throws RemoteException {
 		if (actionExecutee) {
@@ -129,6 +130,7 @@ public class Actions implements IActions {
 	 * @param arene
 	 *            arene
 	 */
+	@Override
 	public void interaction(int ref1, int ref2, IArene arene)
 			throws RemoteException {
 		if (actionExecutee) {

@@ -55,6 +55,7 @@ public class PointComp extends Point implements Comparator<Point> {
 	 * @return <0 si le premier point est plus proche, 0 si les points sont a la
 	 *         meme distance et 1 si le deuxieme est plus proche
 	 */
+	@Override
 	public int compare(Point o1, Point o2) {
 		return distance(o1).compareTo(distance(o2));
 	}
