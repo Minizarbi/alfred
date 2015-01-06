@@ -8,4 +8,6 @@
 
 # Mardi
 
-- On a tout fini, on a même validé le projet en avance.
+- Nous avons amélioré et débuggé la stratégie du ramasseur et du fuyard.
+- Nous avons rajouté le personnage téléporteur.
+- Nous avons modifié l'IHM pour afficher des images selon l'élément à afficher et utiliser un fond blanc.
