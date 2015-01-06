@@ -1,5 +1,5 @@
 # Caractéristiques
-## Une quantité de points donnée à répartir entre force et charisme, afin d'éviter les abus.
+Une quantité de points donnée à répartir entre force et charisme, afin d'éviter les abus.
 
 # Potions
 ## Potion d'invisibilité
@@ -18,14 +18,17 @@ Augmente seulement le charisme.
 Augmente seulement la force.
 
 # Règles
-## Ajouter des murs à l'arène, une protection pour qu'on ne puisse pas sortir.
+## Limites de l'arène
+Ajouter des murs à l'arène, une protection pour qu'on ne puisse pas sortir.
 C'est l'arène qui vérifie que le personnage n'est pas à l'extérieur et prend les mesures nécessaires :
 Impossibilité d'effectuer le déplacement demandé.
 Téléportation automatique au point le plus proche du point demandé, mais à l'intérieur de l'arène.
 Malus de force et/ou de charisme.
 Mort punitive.
 
-## Temps limite atteint donne une égalité.
+## Temps limite
+Lorsqu'on dépasse le temps limite, il y a égalité.
 
 # IHM
-## Mode pas à pas, un bouton qui permet de faire avancer progressivement le combat au lieu de le faire automatiquement toutes les secondes.
+## Mode pas à pas
+Un bouton qui permet de faire avancer progressivement le combat au lieu de le faire automatiquement toutes les secondes.
