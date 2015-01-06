@@ -1,7 +1,6 @@
 import java.rmi.RemoteException;
 
 import controle.Console;
-import element.Fuyard;
 import element.Personnage;
 
 /**
