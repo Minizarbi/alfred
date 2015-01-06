@@ -38,7 +38,6 @@ public class Ramasseur extends Personnage {
 			
 			if (cible == null) { // si il n'y a pas de potion a proximite
 				parler("Y'a que des personnages, j'erre...", ve);
-				System.out.println("Here!");
 				deplacements.seDirigerVers(0);
 			}
 			else {

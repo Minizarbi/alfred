@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -17,6 +18,7 @@ import java.util.Random;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -24,6 +26,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import element.Personnage;
+import element.Potion;
 
 import serveur.IArene;
 
@@ -150,7 +155,14 @@ public class IHM extends JFrame {
 						// recupere les coordonnes de l'element
 						cx = s.getPoint().x * rect.width / 100;
 						cy = s.getPoint().y * rect.height / 100;
-
+						
+						Image img;
+						if(s.getControleur().getElement() instanceof Personnage)
+							img = new ImageIcon("Z:/21402085/Documents/JAVA/WorkspaceProjetProgrammation/cheval.png").getImage();
+						else
+							img = new ImageIcon("Z:/21402085/Documents/JAVA/WorkspaceProjetProgrammation/ecureuil.png").getImage();
+						g.drawImage(img,cx,cy,50,50,this);
+						/* affichage de base
 						// Couleur du contour : Noir
 						g.setColor(new Color(0, 0, 0, 255));
 						// Contour
@@ -161,6 +173,7 @@ public class IHM extends JFrame {
 						// construis un oval aux coordonnes cx,cy de taille 8 x
 						// 8
 						g.fillOval(cx, cy, 8, 8);
+						*/
 
 						// recupere les phrases dites par l'element
 						dial = (s.getPhrase() == null) ? "" : " : "
