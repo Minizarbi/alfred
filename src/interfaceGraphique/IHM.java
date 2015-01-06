@@ -15,6 +15,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+//import java.util.Random;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -27,8 +28,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import element.Personnage;
+import element.Combattant;
+import element.Fuyard;
+import element.Maitre;
+//import element.Personnage;
 import element.Potion;
+import element.Ramasseur;
+import element.Seducteur;
+import element.Teleporteur;
 
 import serveur.IArene;
 
@@ -108,6 +115,11 @@ public class IHM extends JFrame {
 		public void paintComponent(Graphics g) {
 			// affiche l'arene comme un rectangle
 			Rectangle rect = this.getBounds();
+			
+			//Fond de l'arène blanc
+			g.setColor(new Color(255,255,255));
+			g.fillRect(0, 0, rect.width, rect.height);
+			g.setColor(new Color(0, 0, 0));
 
 			// si la connexion est en cours ou il y a une erreur
 			if ((state == State.INIT) || (cnxError)) {
@@ -139,7 +151,8 @@ public class IHM extends JFrame {
 					// mets a jour la liste des elements en vie sur l'arene
 					world = ((IArene) serveur).getWorld();
 
-					int ref, cx, cy;
+					int ref;
+					int cx, cy;
 					String dial;
 
 					// reinitialise l'affichage de l'arene
@@ -156,24 +169,41 @@ public class IHM extends JFrame {
 						cx = s.getPoint().x * rect.width / 100;
 						cy = s.getPoint().y * rect.height / 100;
 						
-						Image img;
-						if(s.getControleur().getElement() instanceof Personnage)
-							img = new ImageIcon("Z:/21402085/Documents/JAVA/WorkspaceProjetProgrammation/cheval.png").getImage();
-						else
-							img = new ImageIcon("Z:/21402085/Documents/JAVA/WorkspaceProjetProgrammation/ecureuil.png").getImage();
-						g.drawImage(img,cx,cy,50,50,this);
-						/* affichage de base
-						// Couleur du contour : Noir
-						g.setColor(new Color(0, 0, 0, 255));
-						// Contour
-						g.fillOval(cx - 1, cy - 1, 10, 10);
-						// calcule une couleur pour la representation
-						g.setColor(new Color(r.nextInt(255), r.nextInt(255), r
-								.nextInt(255), 200));
-						// construis un oval aux coordonnes cx,cy de taille 8 x
-						// 8
-						g.fillOval(cx, cy, 8, 8);
-						*/
+						//Gestion de l'image en fonction de l'element
+						Image img = null;
+						
+						//Chaque element a une image specifique
+						if(s.getControleur().getElement() instanceof Combattant)
+							img = new ImageIcon("./img/combattant.png").getImage();
+						else if(s.getControleur().getElement() instanceof Fuyard)
+							img = new ImageIcon("./img/fuyard.png").getImage();
+						else if(s.getControleur().getElement() instanceof Maitre)
+							img = new ImageIcon("./img/maitre.png").getImage();
+						else if(s.getControleur().getElement() instanceof Ramasseur)
+							img = new ImageIcon("./img/ramasseur.png").getImage();
+						else if(s.getControleur().getElement() instanceof Seducteur)
+							img = new ImageIcon("./img/seducteur.png").getImage();
+						else if(s.getControleur().getElement() instanceof Teleporteur)
+							img = new ImageIcon("./img/teleporteur.png").getImage();
+						else if(s.getControleur().getElement() instanceof Potion)
+							img = new ImageIcon("./img/potion.png").getImage();
+						else{
+							//Si pas defini on laisse le point de base
+							// Couleur du contour : Noir
+							g.setColor(new Color(0, 0, 0, 255));
+							// Contour
+							g.fillOval(cx - 1, cy - 1, 10, 10);
+							// calcule une couleur pour la representation
+							g.setColor(new Color(r.nextInt(255), r.nextInt(255), r
+									.nextInt(255), 200));
+							// construis un oval aux coordonnes cx,cy de taille 8 x
+							// 8
+							g.fillOval(cx, cy, 8, 8);
+						}
+						//Si on a une image, on l'affiche
+						if(img != null)
+							g.drawImage(img,cx,cy,50,50,this);
+							
 
 						// recupere les phrases dites par l'element
 						dial = (s.getPhrase() == null) ? "" : " : "
