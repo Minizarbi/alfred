@@ -4,6 +4,7 @@
 import java.rmi.RemoteException;
 
 import controle.Console;
+import element.Fuyard;
 import element.Personnage;
 
 /**
@@ -25,9 +26,9 @@ public class TestPersonnageCentre {
 			String ipArene = "localhost";
 			if (args.length!=0) if (args[1]!="") ipArene=args[1];
 			
-			Personnage bidule = new Personnage("Personnage", 100, 100);
+			Personnage perso = new Personnage("Perso", 150, 200);
 			
-			new Console(bidule, 40, 40, port, ipArene);
+			new Console(perso, 40, 30, port, ipArene);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
