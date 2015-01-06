@@ -8,4 +8,4 @@ Nous avons ajouté une méthode pour trouver la potion la plus proche dans Calculs
 
 Mardi :
 
-On a tout fini, on a même validé le projet en avance.
+Nous avons rajouté de la documentation.
