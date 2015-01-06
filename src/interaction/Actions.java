@@ -5,6 +5,7 @@ import interfaceGraphique.VueElement;
 import java.rmi.RemoteException;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Random;
 
 import serveur.IArene;
 import controle.IConsole;
@@ -27,6 +28,15 @@ public class Actions implements IActions {
 	 * Initialise a faux, vrai si une action a deja ete executee.
 	 */
 	private boolean actionExecutee;
+	
+	/**
+	 * Permet de jouer plus facilement au Shifumi.
+	 */
+	public enum Shifumi {
+		PIERRE,
+		FEUILLE,
+		CISEAU;
+	}
 
 	public Actions(VueElement ve, Hashtable<Integer, VueElement> voisins) {
 		this.ve = ve;
@@ -165,6 +175,41 @@ public class Actions implements IActions {
 
 	public VueElement getVe() {
 		return ve;
+	}
+	
+	/**
+	 * Les deux joueurs jouent au Shifumi, le gagnant fait perdre une vie au perdant, si egalite rien ne se passe.
+	 * Le jeu est independant de leurs caracteristiques.
+	 * @param ref1 attaquant
+	 * @param ref2 defenseur
+	 * @parem arene arene
+	 * @throws RemoteException
+	 */
+	public void shifumi(int ref1, int ref2, IArene arene)
+			throws RemoteException {
+		if (actionExecutee) {
+			System.err.println("Une action a deja ete executee pendant ce tour !");
+		} else {
+			// recupere l'attaquant et le defenseur
+			IConsole attaquant = arene.consoleFromRef(ref1);
+			IConsole defenseur = arene.consoleFromRef(ref2);
+			
+			if (attaquant.getElement().getVie() > 0
+					&& defenseur.getElement().getVie() > 0) {
+				// cree le shifumi
+				Shifumi s_att = Shifumi.values()[new Random().nextInt(3)];
+				Shifumi s_def = Shifumi.values()[new Random().nextInt(3)];
+				
+				// le perdant perd une vie
+				if (s_att == Shifumi.PIERRE && s_def == Shifumi.CISEAU || s_att == Shifumi.CISEAU && s_def == Shifumi.FEUILLE || s_att == Shifumi.FEUILLE && s_def == Shifumi.PIERRE)
+					defenseur.getElement().setVie(defenseur.getElement().getVie() - 1);
+				else if (s_att != s_def)
+					attaquant.getElement().setVie(attaquant.getElement().getVie() - 1);
+				// si egalite rien ne se passe
+				
+				actionExecutee = true;
+			}
+		}
 	}
 
 }
