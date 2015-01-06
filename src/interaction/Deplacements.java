@@ -253,5 +253,4 @@ public class Deplacements implements IDeplacements {
             actionExecutee = true;
     	}
     }
-
 }
