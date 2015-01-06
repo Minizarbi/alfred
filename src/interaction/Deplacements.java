@@ -8,6 +8,10 @@ import java.util.Random;
 
 import utilitaires.Calculs;
 
+/**
+ * @author 21406420
+ *
+ */
 public class Deplacements implements IDeplacements {
 	/**
 	 * Vue de l'element (pour l'interface graphique).
@@ -130,6 +134,12 @@ public class Deplacements implements IDeplacements {
     	}
     }
     
+    /**
+     * Deplace ce sujet d'une case en direction opposee du sujet dont la reference est donnee en parametre
+     * ref de soi-meme pour du sur-place, 0 pour errer et ref d'un voisin (s'il existe)
+     * On ne manipule que la VueElement
+     * @param ref
+     */
     public void fuir(int ref){
     	if(actionExecutee) {
     		System.err.println("Une action a deja ete executee pendant ce tour !");
@@ -218,6 +228,10 @@ public class Deplacements implements IDeplacements {
     	}
     }
     
+    
+    /**
+     * Se teleporte vers une case aleatoire dans l'arene. Si la case est prise il essaye une autre case.
+     */
     public void seTeleporter() {
     	if(actionExecutee) {
     		System.err.println("Une action a deja ete executee pendant ce tour !");
