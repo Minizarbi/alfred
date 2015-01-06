@@ -1,14 +1,19 @@
-== Caractéristiques ==
-- Une quantité de point donnée à répartir entre force et charisme.
+# CaractÃ©ristiques
+- Une quantitÃ© de point donnÃ©e Ã  rÃ©partir entre force et charisme.
 
-== Potions ==
-- Potion Tumvoiplu : Invisible pour un temps donnée ou jusqu'au prochain mouvement.
-- Potion Oracle : Permet de voir les invisibles pour un temps donnée.
-- Potion Kyexploz : Place une potion qui explose quand on la ramasse.
+# Potions
+## Potion Tumvoiplu
+Invisible pour un temps donnÃ©e ou jusqu'au prochain mouvement.
 
-== Règles ==
-- Ajouter des murs à l'arène.
-- Temps limite résulte une égalité.
+## Potion Oracle
+Permet de voir les invisibles pour un temps donnÃ©e.
 
-== IHM ==
-- Mode pas à pas, un bouton qui permet de faire avancer progressivement le combat au lieu de le faire automatiquement toutes les secondes.
+## Potion Kyexploz
+Place une potion qui explose quand on la ramasse.
+
+# RÃ¨gles
+- Ajouter des murs Ã  l'arÃ¨ne.
+- Temps limite rÃ©sulte une Ã©galitÃ©.
+
+# IHM
+- Mode pas Ã  pas, un bouton qui permet de faire avancer progressivement le combat au lieu de le faire automatiquement toutes les secondes.
