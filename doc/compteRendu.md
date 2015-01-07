@@ -16,3 +16,17 @@
 
 - Nous avons posé des questions sur les règles et le sujet, en attendant des réponses des enseignants.
 - Nous avons réfléchi a des stratégies qui pourraient bien fonctionner comme celle du Fuyard en exploitant au maximum les règles.
+- Nous avons commencer a coder un personnage : Fuyard
+
+
+=== Strategies ===
+Version locale :
+	Combattant:	saisPlus
+	Fuyard:	Tente de fuire (sans sortir de l'ecran) des qu'il vois un ennemis autour de lui. (Probleme : parfois il effectue des aller-retours (dans les coins) et n'arrive pas a fuir). Si personne autour, il ne bouge pas.
+	Maitre: A des stats tres elevees et effectue la strategies d'un Personnage (a verifier !!!!)
+	Seducteur: S'il voit un ennemis avec un charisme inferieur (egal ????) au sien, il va tenter d'aller en duel, sinon il fuit la Personne. Si personne, il erre (a verifier !!!!)
+	Teleporteur: (a verifier !!!!) il se teleporte aleatoirement sur l'arene des qu'il apercoit un ennemis (il ne peut pas tomber sur une case deja prise). Sinon il est immobile (ou random ????)
+	MeSouviensPlusDuDernier:
+
+Version reseau :
+	Fuyard: fuit continuellement vers l'exterieur de l'arene (fuis un ennemis en priorite s'il en voit un) (A t on le droit ????)
