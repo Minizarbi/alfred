@@ -23,7 +23,7 @@
 - Finir la programmation
 - Finir le rapport
 
-=== Personnages & Strategies ===
+## Personnages & Strategies
 Version locale :
 	Combattant:	saisPlus
 	Fuyard:	Tente de fuire (sans sortir de l'ecran) des qu'il vois un ennemis autour de lui. (Probleme : parfois il effectue des aller-retours (dans les coins) et n'arrive pas a fuir). Si personne autour, il ne bouge pas.
@@ -35,13 +35,13 @@ Version locale :
 Version reseau :
 	Fuyard: fuit continuellement vers l'exterieur de l'arene (fuis un ennemis en priorite s'il en voit un) (A t on le droit ????)
 	
-=== Package Interaction ===
+## Package Interaction
 (Version locale)
 	Ajout d'une methode fuir afin de fuir une reference donnee (Classe Deplacements)
 	Ajout d'une methode fuir afin de se teleporter aleatoirement sur l'arene en allant sur une case vide (Classe Deplacements)
 	Ajout d'une mthode shifumi afin d'avoir une autre facon de combattre (Classe Duel)		Fonctionne-t-elle ????
 	
-=== Package IHM ===
+## Package IHM
 (Version locale)
 	Ajout d'images : chaque Element a sa propre image sur l'arene
 	
