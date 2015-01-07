@@ -1,5 +1,4 @@
 package interfaceGraphique;
-
 import java.awt.Point;
 import java.io.Serializable;
 import java.rmi.RemoteException;
@@ -7,11 +6,10 @@ import java.rmi.RemoteException;
 import controle.IConsole;
 
 /**
- * Definit la representation d'un element par sa vue : coordonnees, reference
- * dans l'annuaire RMI, console, message...
+ * Definit la representation d'un element par sa vue : coordonnees, reference dans l'annuaire RMI, console, message... 
  */
 public final class VueElement implements Serializable {
-
+	
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Reference de l'element sur le serveur.
@@ -32,19 +30,14 @@ public final class VueElement implements Serializable {
 	/**
 	 * Duree de vie (max 10 minutes).
 	 */
-	private int TTL = 60 * 10;
+	private int TTL=60*10;
 
 	/**
 	 * Constructeur
-	 * 
-	 * @param ref
-	 *            la reference sur le serveur
-	 * @param point
-	 *            la position initiale
-	 * @param c
-	 *            le controleur auquel l'element est associe
-	 * @param phrase
-	 *            le message a communiquer
+	 * @param ref la reference sur le serveur
+	 * @param point la position initiale
+	 * @param c le controleur auquel l'element est associe
+	 * @param phrase le message a communiquer
 	 */
 	public VueElement(int ref, Point point, IConsole c, String phrase) {
 		this.ref = ref;
@@ -55,17 +48,11 @@ public final class VueElement implements Serializable {
 
 	/**
 	 * Constructeur
-	 * 
-	 * @param ref
-	 *            la reference sur le serveur
-	 * @param point
-	 *            la position initiale
-	 * @param c
-	 *            le controleur auquel l'element est associe
-	 * @param phrase
-	 *            le message a communiquer
-	 * @param tTL
-	 *            le temps de vie
+	 * @param ref la reference sur le serveur
+	 * @param point la position initiale
+	 * @param c le controleur auquel l'element est associe
+	 * @param phrase le message a communiquer
+	 * @param tTL le temps de vie
 	 */
 	public VueElement(int ref, Point point, IConsole c, String phrase, int tTL) {
 		this.ref = ref;
@@ -90,9 +77,7 @@ public final class VueElement implements Serializable {
 
 	/**
 	 * Mets a jour la duree de vie de l'element
-	 * 
-	 * @param tTL
-	 *            le nouveau temps de vie
+	 * @param tTL le nouveau temps de vie
 	 */
 	public void setTTL(int tTL) {
 		TTL = tTL;
@@ -115,24 +100,22 @@ public final class VueElement implements Serializable {
 	/**
 	 * Renvoie le controleur auquel l'element est associe
 	 */
-	public IConsole getControleur() {
+	public IConsole getControleur(){
 		return this.ctr;
 	}
 
 	/**
 	 * Renvoie le message communique par l'element
 	 */
-	public String getPhrase() {
+	public String getPhrase(){
 		return this.phrase;
 	}
-
+	
 	/**
 	 * Reinitialise le message a communiquer par l'element
-	 * 
-	 * @param phrase
-	 *            le nouveau message
+	 * @param phrase le nouveau message 
 	 */
-	public void setPhrase(String phrase) {
+	public void setPhrase(String phrase){
 		this.phrase = phrase;
 	}
 
@@ -140,27 +123,27 @@ public final class VueElement implements Serializable {
 	 * Diminue la duree de vie d'une unite
 	 */
 	public void decrTTL() {
-		if (TTL > 0)
+		if (TTL>0) 
 			TTL--;
-	}
-
+	}	
+	
 	/**
 	 * Clone la representation courante de l'element
 	 */
-	@Override
 	public VueElement clone() {
-		return new VueElement(ref, point, ctr, phrase, TTL);
+		return new VueElement( ref,  point, ctr, phrase, TTL);
 	}
 
 	/**
 	 * Affiche l'etat courant de l'element
 	 */
-	public String afficher() {
-		try {
+	public String afficher(){
+		try{
 			return this.ctr.afficher();
-		} catch (RemoteException e) {
+		}
+		catch(RemoteException e){
 			e.printStackTrace();
 			return "";
 		}
-	}
+	}	
 }
