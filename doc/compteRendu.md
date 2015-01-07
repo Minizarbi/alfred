@@ -18,6 +18,10 @@
 - Nous avons réfléchi a des stratégies qui pourraient bien fonctionner comme celle du Fuyard en exploitant au maximum les règles.
 - Nous avons commencer a coder un personnage : Fuyard
 
+# Jeudi
+
+- Finir la programmation
+- Finir le rapport
 
 === Strategies ===
 Version locale :
