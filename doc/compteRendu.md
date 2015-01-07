@@ -11,3 +11,8 @@
 - Nous avons amélioré et débuggé la stratégie du ramasseur et du fuyard.
 - Nous avons rajouté le personnage téléporteur.
 - Nous avons modifié l'IHM pour afficher des images selon l'élément à afficher et utiliser un fond blanc.
+
+# Mercredi
+
+- Nous avons posé des questions sur les règles et le sujet, en attendant des réponses des enseignants.
+- Nous avons réfléchi a des stratégies qui pourraient bien fonctionner comme celle du Fuyard en exploitant au maximum les règles.
