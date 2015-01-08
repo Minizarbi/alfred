@@ -24,6 +24,9 @@ Chaque version sera détaillée plus loin.
 
 Avec mon binôme, nous avons décider d'utiliser le gestionnaire de version nommé GIT afin de pouvoir développer notre application de manière simple et efficace.
 En effet, GIT permet de "partager" et de gérer les différentes versions du code.
+La stratégie utilisée pour le tournois est l'utilisation du charisme : 99 charisme et 1 de vie.
+Notre personnage fuit les plus fort et tente d'aller en duel contre les personnages avec lesquels il gagne.
+Il tente des coups d'états afin de ne pas avoir de leader.
 
 ## Personnages
 
@@ -56,6 +59,12 @@ Exemple : une potion ayant 50 de force va rajouter 50 de force à la personne la
 La version locale est une version dans laquelle nous avions le droit d'effectuer toutes les modifications de code souhaitées dans toutes les classes du projet.
 Nous n'étions pas limité.
 L'objectif étant de créer au moins 5 personnages, 3 potions et d'ajouter quelques méthodes dans le package "interaction" (package gérant principalement les duels et les déplacements).
+
+## Diagramme de classes
+
+Nous avons utilisé le plugin ObjetAid afin de générer le diagramme de classes.
+
+#image#
 
 ## Personnages & Strategies
 
