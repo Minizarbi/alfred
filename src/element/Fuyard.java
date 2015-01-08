@@ -23,7 +23,7 @@ public class Fuyard extends Personnage{
 	public void fuir(VueElement ve, Deplacements deplacements){
 		int fuiteX, fuiteY;
 		
-		//On regarde où est la fuite la plus rapide depuis le centre de l'arene
+		//On regarde ou est la fuite la plus rapide depuis le centre de l'arene
 		if(ve.getPoint().x < 50)
 			fuiteX = -20;
 		else
