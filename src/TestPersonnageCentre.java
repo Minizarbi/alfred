@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.util.Random;
 
 import controle.Console;
+import element.Charismatique;
 import element.Personnage;
 
 /**
@@ -26,7 +27,7 @@ public class TestPersonnageCentre {
 			}
 			
 			Random r = new Random();
-			Personnage bidule = new Personnage("Truc",  r.nextInt(30), r.nextInt(30), r.nextInt(29)+1, 1, r.nextInt(10));
+			Charismatique bidule = new Charismatique("charismatique");
 			
 			new Console(bidule, 40, 40, port, ipArene);
 		} catch (RemoteException e) {

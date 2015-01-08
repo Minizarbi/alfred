@@ -58,16 +58,16 @@ public class Charismatique extends Personnage{
 			int refPlusProche = cible.getRef();
 			Element elemPlusProche = cible.getControleur().getElement();
 			
-			if(getLeader() != -1){
+			/*if(getLeader() != -1){
 				
 				for(Integer ref:voisins.keySet()) {
-					if(ref == getLeader() && ref != getLeader()){
+					if(ref == getLeader() && ref != ve.getRef()){
 						parler("Grrrr ! duel avec " + ref, ve);
 						actions.interaction(refRMI, ref, ve.getControleur().getArene());
 						return;
 					}
 				}				
-			}
+			}*/
 
 			if (distPlusProche <= 2) { // si suffisamment proches
 				if (elemPlusProche instanceof Potion) { // potion
