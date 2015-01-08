@@ -17,8 +17,8 @@ public class Charismatique extends Personnage{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public Charismatique() {
-		super("Charismatique", 0, 99, 1, 1, 0);
+	public Charismatique(String nom) {
+		super(nom, 0, 99, 1, 1, 0);
 	}
 	
 	public void fuir(VueElement ve, VueElement cible, Deplacements deplacements){
@@ -35,7 +35,7 @@ public class Charismatique extends Personnage{
 		deplacements.seDirigerVers(new Point(x,y)); // fuir
 	}
 	
-	/*
+	/**
 	 * On evite les combats perdus d'avance
 	 * On va chercher les combat gagnes d'avance et essayer de les faire
 	 */

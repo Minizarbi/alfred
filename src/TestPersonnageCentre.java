@@ -2,9 +2,9 @@
 
 
 import java.rmi.RemoteException;
+import java.util.Random;
 
 import controle.Console;
-import element.Charismatique;
 import element.Personnage;
 
 /**
@@ -20,12 +20,13 @@ public class TestPersonnageCentre {
 				port = Integer.parseInt(args[0]);
 			}
 			
-			String ipArene = "localhost"; // par défaut, localhost
+			String ipArene = "localhost"; // par defaut, localhost
 			if (args.length > 1) { 
 				ipArene = args[1];
 			}
 			
-			Charismatique bidule = new Charismatique();
+			Random r = new Random();
+			Personnage bidule = new Personnage("Truc",  r.nextInt(30), r.nextInt(30), r.nextInt(29)+1, 1, r.nextInt(10));
 			
 			new Console(bidule, 40, 40, port, ipArene);
 		} catch (RemoteException e) {
