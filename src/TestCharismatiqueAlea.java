@@ -25,7 +25,7 @@ public class TestCharismatiqueAlea {
 				ipArene = args[1];
 			}
 			
-			String nom = "Truc";
+			String nom = "Felix";
 			if (args.length > 2) { 
 				nom = args[2];
 			}

@@ -25,8 +25,13 @@ public class TestPersonnageCentre {
 				ipArene = args[1];
 			}
 			
+			String nom = "Alfred";
+			if (args.length > 2) { 
+				nom = args[2];
+			}
+			
 			Random r = new Random();
-			Personnage bidule = new Personnage("Truc",  r.nextInt(30), r.nextInt(30), r.nextInt(29)+1, 1, r.nextInt(10));
+			Personnage bidule = new Personnage(nom,  r.nextInt(30), r.nextInt(30), r.nextInt(29)+1, 1, r.nextInt(10));
 			
 			new Console(bidule, 40, 40, port, ipArene);
 		} catch (RemoteException e) {
