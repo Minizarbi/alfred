@@ -21,6 +21,10 @@ public class Maitre extends Personnage {
 		super(nom, 2147483647, 2147483647);
 	}
 
+	/*
+	 * Tente de faire un duel avec ses voisins
+	 * Ne ramasse pas de potion
+	 */
 	@Override
 	public void strategie(VueElement ve,
 			Hashtable<Integer, VueElement> voisins, Integer refRMI)

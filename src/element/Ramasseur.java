@@ -21,6 +21,9 @@ public class Ramasseur extends Personnage {
 		super(nom, 100, 100);
 	}
 
+	/*
+	 * Tente de ramasser toutes les potions quand il en voit, sinon il erre
+	 */
 	@Override
 	public void strategie(VueElement ve,
 			Hashtable<Integer, VueElement> voisins, Integer refRMI)

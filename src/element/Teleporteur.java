@@ -20,6 +20,10 @@ public class Teleporteur extends Personnage {
 		super(nom, 10, 10);
 	}
 
+	/*
+	 * Se teleporte aleatoirement dans l'arene (sur une case vide) s'il a un voisin ennemi
+	 * Sinon il ne bouge pas
+	 */
 	public void strategie(VueElement ve, Hashtable<Integer,VueElement> voisins, Integer refRMI) throws RemoteException {
 		Actions actions = new Actions(ve, voisins); //je recupere les voisins (distance < 10)
         Deplacements deplacements = new Deplacements(ve,voisins);

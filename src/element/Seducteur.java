@@ -17,6 +17,11 @@ public class Seducteur extends Personnage {
 		super(nom, 50, 400);
 	}
 
+	/*
+	 * Va convertir son voisin (ennemi) proche s'il gagne le duel
+	 * Sinon il fuit son voisin (ennemi)
+	 * S'il n'a pas de voisin il ramasse les potions s'il en voit ou il erre
+	 */
 	@Override
 	public void strategie(VueElement ve,
 			Hashtable<Integer, VueElement> voisins, Integer refRMI)

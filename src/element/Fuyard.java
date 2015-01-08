@@ -21,6 +21,11 @@ public class Fuyard extends Personnage {
 		super(nom, 100, 100);
 	}
 
+	/*
+	 * Essaye de fuir dès qu'il a un voisin(ennemi), sinon il ne bouge pas
+	 * Il ne sort pas de l'arene
+	 * Il ramasse les potions s'il en voit
+	 */
 	@Override
 	public void strategie(VueElement ve,
 			Hashtable<Integer, VueElement> voisins, Integer refRMI)
