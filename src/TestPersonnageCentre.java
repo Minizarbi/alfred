@@ -5,7 +5,6 @@ import java.rmi.RemoteException;
 import java.util.Random;
 
 import controle.Console;
-import element.Charismatique;
 import element.Personnage;
 
 /**
