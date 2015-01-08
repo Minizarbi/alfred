@@ -17,7 +17,7 @@ public class Fuyard extends Personnage{
 	private static final long serialVersionUID = 1L;
 
 	public Fuyard() {
-		super("biche", 0, 0, 0, 0, 0);
+		super("biche", 1, 1, 1, 1, 1);
 	}
 	
 	public void fuir(VueElement ve, Deplacements deplacements){

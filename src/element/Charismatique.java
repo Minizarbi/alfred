@@ -18,7 +18,7 @@ public class Charismatique extends Personnage{
 	private static final long serialVersionUID = 1L;
 
 	public Charismatique() {
-		super("Charismatique", 0, 99, 1, 4, 0);
+		super("Charismatique", 0, 99, 1, 1, 0);
 	}
 	
 	public void fuir(VueElement ve, VueElement cible, Deplacements deplacements){

@@ -24,7 +24,7 @@ public class TestPersonnageCentre {
 				ipArene = args[1];
 			}
 			
-			Personnage bidule = new Personnage("Bidule", 200, 100, 100, 150, 200);
+			Personnage bidule = new Personnage("Bidule", 10, 10, 10, 1, 10);
 			
 			new Console(bidule, 40, 40, port, ipArene);
 		} catch (RemoteException e) {
