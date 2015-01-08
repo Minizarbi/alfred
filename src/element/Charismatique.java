@@ -78,17 +78,24 @@ public class Charismatique extends Personnage{
 					if (!memeEquipe) { // duel seulement si pas dans la meme
 										// equipe (pas de coup d'etat possible
 										// dans ce cas)
-						// On se combat que si on a un charisme superieur
-						if (this.getCaract("charisme") > ve.getControleur()
+						//On regarde si le combat est perdu d'avance
+						if (this.getCaract("charisme") <= ve.getControleur()
+								.getArene().consoleFromRef(refPlusProche)
+								.getElement().getCaract("force")) {
+							parler("Je fuis " + refPlusProche, ve);
+							this.fuir(ve, cible, deplacements);
+						}
+						else if (this.getCaract("charisme") <= ve.getControleur()
 								.getArene().consoleFromRef(refPlusProche)
 								.getElement().getCaract("charisme")) {
+							parler("Je fuis " + refPlusProche, ve);
+							this.fuir(ve, cible, deplacements);
+						}
+						else{
 							// duel
 							parler("Je fais un duel avec " + refPlusProche, ve);
 							actions.interaction(refRMI, refPlusProche, ve
 									.getControleur().getArene());
-						} else {
-							parler("Je fuis " + refPlusProche, ve);
-							this.fuir(ve, cible, deplacements);
 						}
 					} else {
 						parler("J'erre...", ve);
@@ -97,15 +104,22 @@ public class Charismatique extends Personnage{
 				}
 			} else { // si voisins, mais plus eloignes
 				if (!memeEquipe) { // potion ou enemmi
-					if (this.getCaract("charisme") > ve.getControleur()
+					//On regarde si le combat est perdu d'avance
+					if (this.getCaract("charisme") <= ve.getControleur()
 							.getArene().consoleFromRef(refPlusProche)
-							.getElement().getCaract("charisme")) {
-						// je vais vers le plus proche
-						parler("Je vais vers mon voisin " + refPlusProche, ve);
-						deplacements.seDirigerVers(refPlusProche);
-					} else {
+							.getElement().getCaract("force")) {
 						parler("Je fuis " + refPlusProche, ve);
 						this.fuir(ve, cible, deplacements);
+					}
+					else if (this.getCaract("charisme") <= ve.getControleur()
+							.getArene().consoleFromRef(refPlusProche)
+							.getElement().getCaract("charisme")) {
+						parler("Je fuis " + refPlusProche, ve);
+						this.fuir(ve, cible, deplacements);
+					}
+					else{
+						parler("Je vais vers mon voisin " + refPlusProche, ve);
+						deplacements.seDirigerVers(refPlusProche);
 					}
 
 				} else {
