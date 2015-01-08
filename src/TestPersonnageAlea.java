@@ -30,7 +30,7 @@ public class TestPersonnageAlea {
 			}
 			
 			Random r = new Random();
-			Personnage bidule = new Personnage(nom,  r.nextInt(30), r.nextInt(30), r.nextInt(29)+1, 1, r.nextInt(10));
+			Personnage bidule = new Personnage(nom);
 			new Console(bidule, r.nextInt(100), r.nextInt(100), port, ipArene);
 		} catch (RemoteException e) {
 			e.printStackTrace();

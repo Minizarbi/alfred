@@ -8,6 +8,7 @@ import interaction.Actions;
 import interaction.Deplacements;
 import interfaceGraphique.VueElement;
 
+import java.awt.Point;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -57,6 +58,10 @@ public class Personnage extends Element implements IPersonnage {
 				
 		leader = -1;
 		equipe = new ArrayList<Integer>();
+	}
+	
+	public Personnage(String nom) {
+		this(nom, 0, 99, 1, 1, 0);
 	}
 	
 	/* ----------------------------------------------------------
@@ -222,82 +227,89 @@ public class Personnage extends Element implements IPersonnage {
 		equipe.clear();
 	}
 	
+	public void fuir(VueElement ve, VueElement cible, Deplacements deplacements){
+		int x,y;
+		if(ve.getPoint().x > cible.getPoint().x)
+			x = ve.getPoint().x+10;
+		else
+			x = ve.getPoint().x-10;
+		if(ve.getPoint().y > cible.getPoint().y)
+			y = ve.getPoint().y+10;
+		else
+			y = ve.getPoint().y-10;
+		
+		deplacements.seDirigerVers(new Point(x,y)); // fuir
+	}
 	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/** --------------------------------------------------------------------
-	 * 	public void strategie(VueElement ve, Hashtable<Integer,VueElement> voisins, Integer refRMI) throws RemoteException
-	 *  --------------------------------------------------------------------
-	 *  Classe à modifier pour la stratégie à adopter par votre personnage.
-	 *  --------------------------------------------------------------------
-	 * Met en place la strategie. On ne peut utiliser que les methodes de la 
-	 * classe Actions.
-	 * @param ve vue de l'element
-	 * @param voisins element voisins de cet element
-	 * @param refRMI reference attribuee a cet element par le serveur
-	 * @throws RemoteException
+	/**
+	 * On evite les combats perdus d'avance
+	 * On va chercher les combat gagnes d'avance et essayer de les faire
+	 * On essaie de faire des coups d'etat si on les gagne
 	 */
-	public void strategie(VueElement ve, Hashtable<Integer,VueElement> voisins, Integer refRMI) throws RemoteException {
-        Actions actions = new Actions(ve, voisins); //je recupere les voisins (distance < 10)
-        Deplacements deplacements = new Deplacements(ve,voisins);
-        
-        if (0 == voisins.size()) { // je n'ai pas de voisins, j'erre
-        	parler("J'erre...", ve);
-        	deplacements.seDirigerVers(0); //errer
-            
-        } else {
+	public void strategie(VueElement ve, Hashtable<Integer, VueElement> voisins, Integer refRMI) throws RemoteException {
+		Actions actions = new Actions(ve, voisins); // je recupere les voisins
+													// (distance < 10)
+		Deplacements deplacements = new Deplacements(ve, voisins);
+
+		if (0 == voisins.size()) { // je n'ai pas de voisins, j'erre
+			parler("J'erre...", ve);
+			deplacements.seDirigerVers(0); // errer
+
+		} else {
 			VueElement cible = Calculs.chercherElementProche(ve, voisins);
-			
-			int distPlusProche = Calculs.distanceChebyshev(ve.getPoint(), cible.getPoint());
-			
+
+			int distPlusProche = Calculs.distanceChebyshev(ve.getPoint(),
+					cible.getPoint());
+
 			int refPlusProche = cible.getRef();
 			Element elemPlusProche = cible.getControleur().getElement();
-			
-			// dans la meme equipe ?
-			boolean memeEquipe = false;
-			
-			if(elemPlusProche instanceof Personnage) {
-				memeEquipe = (leader != -1 && leader == ((Personnage) elemPlusProche).getLeader()) || // meme leader
-						leader == refPlusProche || // cible est le leader de this
-						((Personnage) elemPlusProche).getLeader() == refRMI; // this est le leader de cible
-			}
-			
-			if(distPlusProche <= 2) { // si suffisamment proches
-				if(elemPlusProche instanceof Potion) { // potion
-					// ramassage
-					parler("Je ramasse une potion", ve);
-					actions.ramasser(refRMI, refPlusProche, ve.getControleur().getArene());
-					
+
+			if (distPlusProche <= 2) { // si suffisamment proches
+				if (elemPlusProche instanceof Potion) { // potion
+					parler("J'erre...", ve);
+					deplacements.seDirigerVers(0); // errer
+
 				} else { // personnage
-					if(!memeEquipe) { // duel seulement si pas dans la meme equipe (pas de coup d'etat possible dans ce cas)
-						// duel
-						parler("Je fais un duel avec " + refPlusProche, ve);
-						actions.interaction(refRMI, refPlusProche, ve.getControleur().getArene());
-					} else {
-			        	parler("J'erre...", ve);
-			        	deplacements.seDirigerVers(0); // errer
+						//On regarde si le combat est perdu d'avance
+						if (this.getCaract("charisme") <= ve.getControleur()
+								.getArene().consoleFromRef(refPlusProche)
+								.getElement().getCaract("force")) {
+							parler("Je fuis " + refPlusProche, ve);
+							this.fuir(ve, cible, deplacements);
+						}
+						else if (this.getCaract("charisme") <= ve.getControleur()
+								.getArene().consoleFromRef(refPlusProche)
+								.getElement().getCaract("charisme")) {
+							parler("Je fuis " + refPlusProche, ve);
+							this.fuir(ve, cible, deplacements);
+						}
+						else{
+							// Le combat semble gagner ==> duel
+							parler("Miaou ! duel avec " + refPlusProche, ve);
+							actions.interaction(refRMI, refPlusProche, ve
+									.getControleur().getArene());
+						}
 					}
-				}
 			} else { // si voisins, mais plus eloignes
-				if(!memeEquipe) { // potion ou enemmi 
-					// je vais vers le plus proche
-		        	parler("Je vais vers mon voisin " + refPlusProche, ve);
-		        	deplacements.seDirigerVers(refPlusProche);
-		        	
-				} else {
-		        	parler("J'erre...", ve);
-		        	deplacements.seDirigerVers(0); // errer
-				}
+					//On regarde si le combat est perdu d'avance
+					if (this.getCaract("charisme") <= ve.getControleur()
+							.getArene().consoleFromRef(refPlusProche)
+							.getElement().getCaract("force")) {
+						parler("Je fuis " + refPlusProche, ve);
+						this.fuir(ve, cible, deplacements);
+					}
+					else if (this.getCaract("charisme") <= ve.getControleur()
+							.getArene().consoleFromRef(refPlusProche)
+							.getElement().getCaract("charisme")) {
+						parler("Je fuis " + refPlusProche, ve);
+						this.fuir(ve, cible, deplacements);
+					}
+					else{
+						parler("Je vais vers mon voisin " + refPlusProche, ve);
+						deplacements.seDirigerVers(refPlusProche);
+					}
+
 			}
-        }
+		}
 	}
 }
