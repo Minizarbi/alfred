@@ -1,6 +1,5 @@
 package element;
 
-import interaction.Actions;
 import interaction.Deplacements;
 import interfaceGraphique.VueElement;
 
@@ -38,9 +37,22 @@ public class Fuyard extends Personnage{
 		//On se deplace vers le point de fuite
 		deplacements.seDirigerVers(new Point(ve.getPoint().x + fuiteX, ve.getPoint().y + fuiteY));
 	}
+	
+	public void fuir(VueElement ve, VueElement cible, Deplacements deplacements){
+		int x,y;
+		if(ve.getPoint().x > cible.getPoint().x)
+			x = ve.getPoint().x+10;
+		else
+			x = ve.getPoint().x-10;
+		if(ve.getPoint().y > cible.getPoint().y)
+			y = ve.getPoint().y+10;
+		else
+			y = ve.getPoint().y-10;
+		
+		deplacements.seDirigerVers(new Point(x,y)); // fuir
+	}
     
 	public void strategie(VueElement ve, Hashtable<Integer,VueElement> voisins, Integer refRMI) throws RemoteException {
-        Actions actions = new Actions(ve, voisins); //je recupere les voisins (distance < 10)
         Deplacements deplacements = new Deplacements(ve,voisins);
 
         if (0 == voisins.size()) { // je n'ai pas de voisins, j'erre
@@ -64,32 +76,23 @@ public class Fuyard extends Personnage{
 						((Personnage) elemPlusProche).getLeader() == refRMI; // this est le leader de cible
 			}
 			
-			if(distPlusProche <= 2) { // si suffisamment proches
+			if(distPlusProche <= 4) { // si suffisamment proches
 				if(elemPlusProche instanceof Potion) { // potion
-					// ramassage
-					parler("Je ramasse une potion", ve);
-					actions.ramasser(refRMI, refPlusProche, ve.getControleur().getArene());
+					parler("Je fuis...", ve);
+		        	this.fuir(ve, deplacements); //fuite
 					
 				} else { // personnage
 					if(!memeEquipe) { // duel seulement si pas dans la meme equipe (pas de coup d'etat possible dans ce cas)
-						// duel
-						parler("Je fais un duel avec " + refPlusProche, ve);
-						actions.interaction(refRMI, refPlusProche, ve.getControleur().getArene());
+						parler("Je fuis la Personne...", ve);
+			        	this.fuir(ve, cible, deplacements); //fuite
 					} else {
-			        	parler("J'erre...", ve);
-			        	deplacements.seDirigerVers(0); // errer
+						parler("Je fuis...", ve);
+			        	this.fuir(ve, deplacements); //fuite
 					}
 				}
 			} else { // si voisins, mais plus eloignes
-				if(!memeEquipe) { // potion ou enemmi 
-					// je vais vers le plus proche
-		        	parler("Je vais vers mon voisin " + refPlusProche, ve);
-		        	deplacements.seDirigerVers(refPlusProche);
-		        	
-				} else {
-		        	parler("J'erre...", ve);
-		        	deplacements.seDirigerVers(0); // errer
-				}
+				parler("Je fuis...", ve);
+	        	this.fuir(ve, deplacements); //fuite
 			}
         }
 	}
