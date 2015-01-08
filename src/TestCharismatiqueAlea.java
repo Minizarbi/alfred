@@ -24,9 +24,14 @@ public class TestCharismatiqueAlea {
 			if (args.length > 1) { 
 				ipArene = args[1];
 			}
-
+			
+			String nom = "Truc";
+			if (args.length > 2) { 
+				nom = args[2];
+			}
+			
 			Random r = new Random();
-			Charismatique bidule = new Charismatique();
+			Personnage bidule = new Charismatique(nom);
 			new Console(bidule, r.nextInt(100), r.nextInt(100), port, ipArene);
 		} catch (RemoteException e) {
 			e.printStackTrace();
