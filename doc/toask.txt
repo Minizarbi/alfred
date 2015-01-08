@@ -1,11 +1,3 @@
-Q : Peut-on générer 100 potions en un coup, si oui pourquoi mon code bug ?
+Q : Combien de Persos/Potions ?
 
-R : 
-
-Q : Pourquoi la potion a-t-elle par défaut le nom d'une épée ?
-
-R : 
-
-Q : Peut-on sortir de l'arène ?
-
-R :
+Q : Sortie ecran ?
