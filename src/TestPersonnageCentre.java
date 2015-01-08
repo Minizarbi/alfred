@@ -4,6 +4,7 @@
 import java.rmi.RemoteException;
 
 import controle.Console;
+import element.Charismatique;
 import element.Personnage;
 
 /**
@@ -24,7 +25,7 @@ public class TestPersonnageCentre {
 				ipArene = args[1];
 			}
 			
-			Personnage bidule = new Personnage("Bidule", 10, 10, 10, 1, 10);
+			Charismatique bidule = new Charismatique();
 			
 			new Console(bidule, 40, 40, port, ipArene);
 		} catch (RemoteException e) {

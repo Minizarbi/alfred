@@ -35,6 +35,10 @@ public class Charismatique extends Personnage{
 		deplacements.seDirigerVers(new Point(x,y)); // fuir
 	}
 	
+	/*
+	 * On evite les combats perdus d'avance
+	 * On va chercher les combat gagnes d'avance et essayer de les faire
+	 */
 	public void strategie(VueElement ve, Hashtable<Integer, VueElement> voisins, Integer refRMI) throws RemoteException {
 		Actions actions = new Actions(ve, voisins); // je recupere les voisins
 													// (distance < 10)
@@ -53,20 +57,7 @@ public class Charismatique extends Personnage{
 			int refPlusProche = cible.getRef();
 			Element elemPlusProche = cible.getControleur().getElement();
 
-			// dans la meme equipe ?
-			boolean memeEquipe = false;
-
 			if (elemPlusProche instanceof Personnage) {
-				memeEquipe = (getLeader() != -1 && getLeader() == ((Personnage) elemPlusProche)
-						.getLeader()) || // meme leader
-						getLeader() == refPlusProche || // cible est le leader
-														// de this
-						((Personnage) elemPlusProche).getLeader() == refRMI; // this
-																				// est
-																				// le
-																				// leader
-																				// de
-																				// cible
 			}
 
 			if (distPlusProche <= 2) { // si suffisamment proches
@@ -75,9 +66,6 @@ public class Charismatique extends Personnage{
 					deplacements.seDirigerVers(0); // errer
 
 				} else { // personnage
-					if (!memeEquipe) { // duel seulement si pas dans la meme
-										// equipe (pas de coup d'etat possible
-										// dans ce cas)
 						//On regarde si le combat est perdu d'avance
 						if (this.getCaract("charisme") <= ve.getControleur()
 								.getArene().consoleFromRef(refPlusProche)
@@ -92,18 +80,13 @@ public class Charismatique extends Personnage{
 							this.fuir(ve, cible, deplacements);
 						}
 						else{
-							// duel
-							parler("Je fais un duel avec " + refPlusProche, ve);
+							// Le combat semble gagner ==> duel
+							parler("Miaou ! duel avec " + refPlusProche, ve);
 							actions.interaction(refRMI, refPlusProche, ve
 									.getControleur().getArene());
 						}
-					} else {
-						parler("J'erre...", ve);
-						deplacements.seDirigerVers(0); // errer
 					}
-				}
 			} else { // si voisins, mais plus eloignes
-				if (!memeEquipe) { // potion ou enemmi
 					//On regarde si le combat est perdu d'avance
 					if (this.getCaract("charisme") <= ve.getControleur()
 							.getArene().consoleFromRef(refPlusProche)
@@ -122,10 +105,6 @@ public class Charismatique extends Personnage{
 						deplacements.seDirigerVers(refPlusProche);
 					}
 
-				} else {
-					parler("J'erre...", ve);
-					deplacements.seDirigerVers(0); // errer
-				}
 			}
 		}
 	}
