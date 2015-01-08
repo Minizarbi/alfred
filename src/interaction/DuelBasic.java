@@ -68,22 +68,26 @@ public class DuelBasic implements IDuel {
 				
 			} else if (isLeader(defenseur, attaquant)) {
 				if(attCharisme > defCharisme) {
-					// coup d'etat
+		            // coup d'etat
+		            int tauxCharisme = (int) (0.1 * defenseur.getElement().getCaract("charisme"));
+		            
+		            int attNewChar =  Math.min(attaquant.getElement().getCaract("charisme") + tauxCharisme, 100);
+		            Hashtable<String, Integer> carAtt = new Hashtable<String, Integer>();
+		            carAtt.put("charisme", attNewChar);
+		            attaquant.majCaractElement(carAtt);
+		            
+		            int defNewChar = Math.max(defenseur.getElement().getCaract("charisme") - tauxCharisme, 0);
+		            Hashtable<String, Integer> carDef = new Hashtable<String, Integer>();
+		            carDef.put("charisme", defNewChar);
+		            defenseur.majCaractElement(carDef);
 
-					int tauxCharisme = (int) (0.1 * defenseur.getElement().getCaract("charisme"));
-					
-					int maximized = attaquant.getElement().getCaract("charisme") + tauxCharisme;
-					if(maximized > 100)maximized = 100;
-					attaquant.getElement().setCharisme(maximized);
-					defenseur.getElement().setCharisme(defenseur.getElement().getCaract("charisme") - tauxCharisme);
-	
-					defenseur.changerLeader(attaquant);
-					attaquant.ajouterPersonnageEquipe(defenseur);
-					System.out.println(attaquant.getRefRMI() + " realise un coup d'etat contre " + defenseur.getRefRMI());
-				} else {
-					// coup d'etat echoue
-					System.out.println("Rien ne se passe");
-				}
+		            defenseur.changerLeader(attaquant);
+		            attaquant.ajouterPersonnageEquipe(defenseur);
+		            System.out.println(attaquant.getRefRMI() + " realise un coup d'etat contre " + defenseur.getRefRMI());
+		        } else {
+		            // coup d'etat echoue
+		            System.out.println("Rien ne se passe");
+		        }
 				
 			} else {
 				// duel
@@ -129,7 +133,7 @@ public class DuelBasic implements IDuel {
 		int attForce = attaquant.getElement().getCaract("force");
 		int defDef = defenseur.getElement().getCaract("defense");
 		Random r = new Random(System.currentTimeMillis());
-		int totalPerdu =  (r.nextInt(11) + attForce) * (1 - defDef/100);
+		int totalPerdu =  (r.nextInt(11) + attForce) * (1 - (int)((float)defDef/100.0));
 		defHp -= totalPerdu;
 		
 		System.out.println("Ouch j'ai perdu " + totalPerdu + ", il me reste " + ((Personnage)defenseur.getElement()).getHP() + " points de vie.");
