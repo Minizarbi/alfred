@@ -38,6 +38,7 @@ public class Charismatique extends Personnage{
 	/*
 	 * On evite les combats perdus d'avance
 	 * On va chercher les combat gagnes d'avance et essayer de les faire
+	 * On essaie de faire des coups d'etat si on les gagne
 	 */
 	public void strategie(VueElement ve, Hashtable<Integer, VueElement> voisins, Integer refRMI) throws RemoteException {
 		Actions actions = new Actions(ve, voisins); // je recupere les voisins
@@ -56,8 +57,16 @@ public class Charismatique extends Personnage{
 
 			int refPlusProche = cible.getRef();
 			Element elemPlusProche = cible.getControleur().getElement();
-
-			if (elemPlusProche instanceof Personnage) {
+			
+			if(getLeader() != -1){
+				
+				for(Integer ref:voisins.keySet()) {
+					if(ref == getLeader() && ref != getLeader()){
+						parler("Grrrr ! duel avec " + ref, ve);
+						actions.interaction(refRMI, ref, ve.getControleur().getArene());
+						return;
+					}
+				}				
 			}
 
 			if (distPlusProche <= 2) { // si suffisamment proches
