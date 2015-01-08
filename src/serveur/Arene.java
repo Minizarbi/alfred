@@ -193,23 +193,38 @@ public class Arene extends UnicastRemoteObject implements IArene, Runnable {
 	/**
 	 * Verifie que les capacites soient positives et inferieures au seuil
 	 * @param r
-	 * @return true si element peut se connecter
+	 * @return chaine vide si element peut se connecter, sinon raison du rejet
 	 * @throws RemoteException
 	 */
-	public boolean verif (Remote r) throws RemoteException {
-		boolean res = true;
+	public String verif (Remote r) throws RemoteException {
+		String res = "";
 		
 		Element e = (Element) ((IConsole) r).getElement();
 		
         if (e instanceof Personnage) {
         	Personnage p = (Personnage) e;
         	
-        	if(p.getLeader() != -1) {
-        		res = false;
+        	if((p.getLeader() != -1) || (!p.getEquipe().isEmpty())){
+        		res = "Votre personnage est deja un leader ou a deja une equipe";
         	}
         	
-        	if(!p.getEquipe().isEmpty()) {
-        		res = false;
+        	if (p.getVitesse() != 1)
+        		res = "Votre personnage a une vitesse differente de 1";
+        	//MODIFIE
+        	if((p.getCharisme() + p.getForce() + p.getHP() /* + p.getVitesse() */ +  (int)((10.0/6.0) * p.getDefense())) > 100){ 
+        		res = "Votre personnage ne respecte pas l'equation d'entree sur serveur : Charisme + force + (10/6)defense <= 100 ";
+        	}
+        	if (p.getHP() < 1){
+        		res = "Votre personnage est deja mort, il des HP nuls ou negatifs";
+        	}
+        	if (p.getCharisme() <0){
+        		res = "Votre personnage a un charisme negatif";
+        	}
+        	if (p.getDefense() <0){
+        		res = "Votre personnage a une defense negative";
+        	}
+        	if (p.getForce() <0){
+        		res = "Votre personnage a une force negative";
         	}
         }
         
@@ -230,7 +245,7 @@ public class Arene extends UnicastRemoteObject implements IArene, Runnable {
 			    System.out.println("adresse de la console "+"rmi://"+ipConsole+":"+portConsole+"/Console"+s.getRef());
 			    Remote r=Naming.lookup("rmi://"+ipConsole+":"+portConsole+"/Console"+s.getRef());
 			    System.out.println("adresse de la console "+"rmi://"+ipConsole+":"+portConsole+"/Console"+s.getRef());
-			    
+			    String cause = "";
 			    //Comportement selon Potion/Personnage
 			    if(((IConsole) r).getElement() instanceof Potion) {
 			    	//on met les potions dans la pile
@@ -248,7 +263,8 @@ public class Arene extends UnicastRemoteObject implements IArene, Runnable {
             			ipAddrConsolesPotions = new Hashtable<Integer, String>();
             		}
             	} else {
-			    	if (verif(r)){
+            		cause = verif(r);
+			    	if (cause.equals("")){
 			    		//on met les personnages dans la pile
 			    		personnages.put(r, s);
 			    		ipAddrConsolesPersonnages.put(s.getRef(),ipConsole);
@@ -265,8 +281,8 @@ public class Arene extends UnicastRemoteObject implements IArene, Runnable {
 			    		}
 			    	}
 			    	else {
-			    		((IConsole) r).shutDown("Tu as triche vilain ! Tu es vire !");	
-			    	}	
+			    		((IConsole) r).shutDown(" Ejecte du serveur pour cause de triche :\n" + cause );	
+			    	}
 			    }
 			} catch (Exception e) {
 				System.out.println("Erreur lors de la connexion d'un client (ref="+s.getRef()+") :");

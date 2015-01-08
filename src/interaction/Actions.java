@@ -128,6 +128,9 @@ public class Actions implements IActions {
     		System.err.println("Une action a deja ete executee pendant ce tour !");
     	} else {
 			 // recupere l'attaquant et le defenseur
+    		System.out.println("attaquant : " + ref1);
+    		System.out.println("defenseur : " + ref2);
+    		
 		    IConsole attaquant = arene.consoleFromRef(ref1);
 		    IConsole defenseur = arene.consoleFromRef(ref2);
 		     

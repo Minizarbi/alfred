@@ -25,7 +25,7 @@ public class TestPersonnageAlea {
 			}
 
 			Random r = new Random();
-			Personnage bidule = new Personnage("Truc", r.nextInt(35),r.nextInt(35), 25, 1, 7);
+			Personnage bidule = new Personnage("Truc",  r.nextInt(30), r.nextInt(30), r.nextInt(29)+1, 1, r.nextInt(10));
 			new Console(bidule, r.nextInt(100), r.nextInt(100), port, ipArene);
 		} catch (RemoteException e) {
 			e.printStackTrace();

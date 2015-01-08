@@ -29,7 +29,7 @@ public class Potion extends Element {
 		/* ---------------------------------------------------
 		 * Nouvelles caractéristiques
 		 * ------------------------------------------------ */
-		ajouterCaract("HP", HP);
+		ajouterCaract("hp", HP);
 		ajouterCaract("vitesse", vitesse);
 		ajouterCaract("defense", defense);
 		
@@ -92,7 +92,7 @@ public class Potion extends Element {
 	 * @return bonus de HP
 	 * -------------------------------------------------------- */
 	public int getHP() {
-		return getCaract("HP");
+		return getCaract("hp");
 	}
 
 	

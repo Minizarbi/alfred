@@ -191,8 +191,8 @@ public class Console extends UnicastRemoteObject implements IConsole {
 	public void perdreVie(int viePerdue) throws RemoteException {
 		elem.setVie(elem.getVie() - viePerdue);
 		
-		elem.parler("Ouch, j'ai perdu " + viePerdue + " points de vie. Il me reste " + this.elem.getVie() + " points de vie.", ve);
-		System.out.println("Ouch, j'ai perdu " + viePerdue + " points de vie. Il me reste " + this.elem.getVie() + " points de vie.");
+		elem.parler("Ouch, je suis mort ", ve); //" + viePerdue + " points de vie. Il me reste " + this.elem.getVie() + " points de vie.", ve);
+		System.out.println("Ouch, je suis mort");// j'ai perdu " + viePerdue + " points de vie. Il me reste " + this.elem.getVie() + " points de vie.");
 	}
 	
 	/**

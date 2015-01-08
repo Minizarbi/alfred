@@ -153,17 +153,16 @@ public class Personnage extends Element implements IPersonnage {
 			eq += ", equipe: ";
 			
 			for(int i = 0; i < equipe.size(); i++) {
-				eq += equipe.get(i);
+				eq += equipe.get(i) + " ";
 				
 				if(i < equipe.size() - 1) {
 					eq += " ";
 				}
 			}
-		} else {
-			eq += " Aucune ";
 		}
 		
-		return super.toString() + "[" + "HP : " + getHP() + ", For : " + getForce() + ", Vit : " + getVitesse() + ", Def : " + getDefense() + ", Cha :" + getCharisme() + "::> Equipe :" + lead + eq + "]";
+		return super.toString() + "[" + "HP : " + getHP() + ", For : " +  getForce() + ", Cha :" + getCharisme() 
+				+  ", Def : " + getDefense() + ", Vit : " + getVitesse() +  lead + eq + "]";
 	}
 	
 	
